@@ -5,6 +5,7 @@ import { Values } from 'redux-form-website-template';
 import store from './store';
 import showResults from './showResults';
 import WizardForm from './WizardForm';
+import './style.css';
 
 const rootEl = document.getElementById('root');
 

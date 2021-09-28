@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import validate from './validate';
 
 const renderError = ({ meta: { touched, error } }) =>
-  touched && error ? <span>{error}</span> : false;
+  touched && error ? <span id="validateError">{error}</span> : false;
 
 const SpendConfig = (props) => {
   return (
@@ -15,8 +15,8 @@ const SpendConfig = (props) => {
 };
 
 export default reduxForm({
-  form: 'wizard', //                 <------ same form name
-  destroyOnUnmount: false, //        <------ preserve form data
-  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  form: 'wizard',
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true,
   validate
 })(SpendConfig);

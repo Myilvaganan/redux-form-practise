@@ -1,0 +1,13 @@
+#validateError {
+  color: brown;
+  font-weight: 600;
+  display: inline-block;
+  font-size: inherit;
+  text-rendering: auto;
+  margin-right: 5px;
+}
+
+#validateError::before {
+  content: '\26A0';
+  margin-right: 5px;
+}

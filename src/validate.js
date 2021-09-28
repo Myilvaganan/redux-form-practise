@@ -1,25 +1,33 @@
 const validate = (values) => {
   const errors = {};
 
-  const sharePecentageValues =
+  const checkForSharePercentage = (value) =>
+    new RegExp(/^[0-9%]+$/).test(value);
+
+  const checkForAlphabet = (value) => new RegExp(/[A-Za-z]/).test(value);
+
+  const sharePercentageValuesArray =
     values &&
     values.spendConfig &&
     Object.values(values.spendConfig).map((value) => {
       return value.share;
     });
 
-  const checkForSharePercentage = (value) =>
-    new RegExp(/^[0-9%]+$/).test(value);
-
-  const validShareInput =
-    sharePecentageValues &&
-    sharePecentageValues
-      .map((element) => (new RegExp(/[A-Za-z]/).test(element) ? 1 : 0))
+  const checkAllValuesAreNonAlphabets =
+    sharePercentageValuesArray &&
+    sharePercentageValuesArray
+      .map((element) => {
+        if (checkForAlphabet(element)) {
+          return 1;
+        } else {
+          return 0;
+        }
+      })
       .reduce((a, c) => a + c, 0);
 
-  const sharePercentage =
-    sharePecentageValues &&
-    sharePecentageValues
+  const sumOfTotalShareInPercentage =
+    sharePercentageValuesArray &&
+    sharePercentageValuesArray
       .map((element) => {
         if (checkForSharePercentage(element)) {
           return element.replace('%', '');
@@ -28,12 +36,12 @@ const validate = (values) => {
       })
       .reduce((acc, cur) => parseFloat(acc) + parseFloat(cur));
 
-  if (!sharePercentage) {
+  if (!sumOfTotalShareInPercentage) {
     errors.spendConfig = 'Required';
-  } else if (validShareInput > 0) {
-    errors.spendConfig = 'Only Numbers & % are allowed';
-  } else if (sharePercentage !== 100) {
-    errors.spendConfig = 'The value must be 100%';
+  } else if (checkAllValuesAreNonAlphabets > 0) {
+    errors.spendConfig = 'Only Numbers and  % are allowed';
+  } else if (sumOfTotalShareInPercentage !== 100) {
+    errors.spendConfig = 'The sum of shares should be 100%';
   }
 
   /* ========================================== */
