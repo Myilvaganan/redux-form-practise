@@ -1,7 +1,7 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import validate from './validate';
-import renderField from './renderField';
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import validate from "./validate";
+import renderField from "./renderField";
 
 const WizardFormFirstPage = (props) => {
   const { handleSubmit } = props;
@@ -42,7 +42,7 @@ const WizardFormFirstPage = (props) => {
 };
 
 export default reduxForm({
-  form: 'wizard', //                 <------ same form name
+  form: "wizard", //                 <------ same form name
   destroyOnUnmount: false, //        <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   validate
