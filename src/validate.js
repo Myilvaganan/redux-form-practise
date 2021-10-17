@@ -55,7 +55,7 @@ const sharePercentageValidation = (values) => {
         }
       })
       .reduce((acc, cur) => parseFloat(acc) + parseFloat(cur), 0);
-  if (!isShareValue) {
+  if (!values || !isShareValue) {
     return "Share percentage is required";
   } else if (!isPositiveFloatValue) {
     return "Only Positive Float values are allowed";
