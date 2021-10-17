@@ -35,14 +35,14 @@ const validate = (values) => {
 
 const sharePercentageValidation = (values) => {
   let isPositiveFloatValue = true;
-  let isSharePresent = false;
+  let isShareValue = false;
 
   const sumOfTotalSharePercentage =
     values &&
     Object.values(values)
       .map((inputValue) => {
         if (inputValue.share) {
-          isSharePresent = true;
+          isShareValue = true;
         }
         return inputValue.share;
       })
@@ -55,7 +55,7 @@ const sharePercentageValidation = (values) => {
         }
       })
       .reduce((acc, cur) => parseFloat(acc) + parseFloat(cur), 0);
-  if (!isSharePresent) {
+  if (!isShareValue) {
     return "Share percentage is required";
   } else if (!isPositiveFloatValue) {
     return "Only Positive Float values are allowed";
