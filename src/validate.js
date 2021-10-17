@@ -58,7 +58,7 @@ const sharePercentageValidation = (values) => {
   if (!values || !isShareValue) {
     return "Share percentage is required";
   } else if (!isPositiveFloatValue) {
-    return "Only Positive Float values are allowed";
+    return "Only positive number values are allowed";
   } else if (sumOfTotalSharePercentage !== 100) {
     return "The sum of shares should be 100";
   }
