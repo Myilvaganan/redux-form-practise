@@ -4,13 +4,11 @@ const isPositiveFloat = (value) =>
 const validate = (values) => {
   const errors = {};
 
-  if (!values.fundingPartnerDetails) {
-    errors.spendConfig = "Share percentage is required";
-  } else {
-    errors.spendConfig = sharePercentageValidation(
-      values.fundingPartnerDetails
-    );
-  }
+  // if (!values.fundingPartnerDetails) {
+  //   errors.spendConfig = "Share percentage is required";
+  // } else {
+  errors.spendConfig = sharePercentageValidation(values.fundingPartnerDetails);
+  // }
 
   /* ========================================== */
 
@@ -37,11 +35,15 @@ const validate = (values) => {
 
 const sharePercentageValidation = (values) => {
   let isPositiveFloatValue = true;
+  let isSharePresent = false;
 
   const sumOfTotalSharePercentage =
     values &&
     Object.values(values)
       .map((inputValue) => {
+        if (inputValue.share) {
+          isSharePresent = true;
+        }
         return inputValue.share;
       })
       .map((sharePercentageValue) => {
@@ -53,8 +55,9 @@ const sharePercentageValidation = (values) => {
         }
       })
       .reduce((acc, cur) => parseFloat(acc) + parseFloat(cur), 0);
-
-  if (!isPositiveFloatValue) {
+  if (!isSharePresent) {
+    return "Share percentage is required";
+  } else if (!isPositiveFloatValue) {
     return "Only Positive Float values are allowed";
   } else if (sumOfTotalSharePercentage !== 100) {
     return "The sum of shares should be 100";

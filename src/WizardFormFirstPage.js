@@ -8,27 +8,27 @@ const WizardFormFirstPage = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
-        name="spendConfig.marketplace.share"
+        name="fundingPartnerDetails.marketplace.share"
         type="text"
         component={renderField}
       />
       <Field
-        name="spendConfig.amazonpay.share"
+        name="fundingPartnerDetails.amazonpay.share"
         type="text"
         component={renderField}
       />
       <Field
-        name="spendConfig.brand.share"
+        name="fundingPartnerDetails.brand.share"
         type="text"
         component={renderField}
       />
       <Field
-        name="spendConfig.bank.share"
+        name="fundingPartnerDetails.bank.share"
         type="text"
         component={renderField}
       />
       <Field
-        name="spendConfig.market.share"
+        name="fundingPartnerDetails.market.share"
         type="text"
         component={renderField}
       />
