@@ -33,7 +33,7 @@ const sharePercentageValidation = (values) => {
   const sharePercentageFloatValues =
     sharePercentageValues &&
     sharePercentageValues
-      .map((value) => isPositiveFloat(value) && parseFloat(value))
+      .map((value) => !isPositiveFloat(value) && parseFloat(value))
       .filter((val) => val);
 
   const sumOfTotalSharePercentage =

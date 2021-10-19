@@ -5,30 +5,31 @@ import renderField from "./renderField";
 
 const WizardFormFirstPage = (props) => {
   const { handleSubmit } = props;
+
   return (
     <form onSubmit={handleSubmit}>
       <Field
-        name="fundingPartnerDetails.marketplace.share"
+        name="fundingPartnerDetails[0].share"
         type="text"
         component={renderField}
       />
       <Field
-        name="fundingPartnerDetails.amazonpay.share"
+        name="fundingPartnerDetails[1]share"
         type="text"
         component={renderField}
       />
       <Field
-        name="fundingPartnerDetails.brand.share"
+        name="fundingPartnerDetails[2].share"
         type="text"
         component={renderField}
       />
       <Field
-        name="fundingPartnerDetails.bank.share"
+        name="fundingPartnerDetails[3].share"
         type="text"
         component={renderField}
       />
       <Field
-        name="fundingPartnerDetails.market.share"
+        name="fundingPartnerDetails[4].share"
         type="text"
         component={renderField}
       />
@@ -45,5 +46,30 @@ export default reduxForm({
   form: "wizard", //                 <------ same form name
   destroyOnUnmount: false, //        <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-  validate
+  validate,
+  initialValues: getInitialValues()
 })(WizardFormFirstPage);
+
+function getInitialValues() {
+  const data = {
+    fundingPartnerDetails: [
+      {
+        share: ""
+      },
+      {
+        share: ""
+      },
+      {
+        share: ""
+      },
+      {
+        share: ""
+      },
+      {
+        share: ""
+      }
+    ]
+  };
+
+  return data;
+}
